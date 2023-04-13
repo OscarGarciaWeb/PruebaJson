@@ -1,0 +1,45 @@
+@import './base.css';
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #fff !important;
+    color: black !important;
+  }
+}
+
+body {
+  display: flex;
+  place-items: center;  
+  height: 100vh;
+}
+
+#app {
+  margin: 0 auto;
+  width: 100vh;
+}
+
+.title
+{
+  display: grid;
+  place-items: center;  
+}
+
+.table-style {
+  margin-top: 20px;
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 16px;
+}
+
+.table-style th,
+.table-style td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.table-style th {
+  background-color: #f2f2f2;
+  color: #444;
+  font-weight: bolder;
+}
