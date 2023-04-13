@@ -47,7 +47,7 @@
         <!-- Initial Solution -->
 
         <!-- Solution 1. Optional chaining (?.) -->
-        <td>
+        <!-- <td>
           {{ getCityById(person.city_id)?.cityName || 'N/A' }}
         </td>
         <td>
@@ -61,8 +61,26 @@
         </td>
         <td>
           {{ getBloodTypeById(person.bloodtype_id)?.bloodName || 'N/A' }}
-        </td>
+        </td> -->
         <!-- Solution 1. Optional chaining (?.) -->
+        
+        <!-- Solution 2. Function return data -->
+        <td>
+          {{ getCityById(person.city_id) || 'N/A' }}
+        </td>
+        <td>
+          {{ getCountryById(person.city_id) || 'N/A' }}
+        </td>
+        <td>
+          {{ getStudyById(person.study_id) || 'N/A' }}
+        </td>
+        <td>
+          {{ getGenderById(person.gender_id) || 'N/A' }}
+        </td>
+        <td>
+          {{ getBloodTypeById(person.bloodtype_id) || 'N/A' }}
+        </td>
+        <!-- Solution 2. Function return data -->
       </tr>
     </tbody>
   </table>
@@ -222,24 +240,71 @@ export default {
   mounted() {},
   methods: {
     getCityById(cityId: any): any {
-      // Initial Solution & Solution 1. Optional chaining (?.)
-      return this.cities.find((city: any) => city.city_id === cityId); 
+      // Initial Solution Solution 1. Optional chaining (?.)
+      // return this.cities.find((city: any) => city.city_id === cityId); 
+
+      // Solution 2. Function return data
+      function findCity(city: any) {
+        return city.city_id === cityId;
+      }      
+      if (this.cities.find(findCity)) {
+        return this.cities.find(findCity).cityName;
+      }
     },
-    getCountryById(countryId: any): any {
-      // Initial Solution & Solution 1. Optional chaining (?.)
-      return this.countries.find((country: any) => country.country_id === countryId);
+    getCountryById(cityId: any): any {
+      // Initial Solution Solution 1. Optional chaining (?.)
+      // return this.countries.find((country: any) => country.country_id === countryId);
+
+      // Solution 2. Function return data
+      let countryResultId : any;
+      function findCity(city: any) {
+        return city.city_id === cityId;
+      }      
+      if (this.cities.find(findCity)) {
+        countryResultId = this.cities.find(findCity).country_id;
+      }
+      function findCountry(country: any) {
+        return country.country_id === countryResultId;
+      }
+      if (this.countries.find(findCountry)) {
+        return this.countries.find(findCountry).countryName;
+      }
     },
     getStudyById(studyId: any): any { 
-      // Initial Solution & Solution 1. Optional chaining (?.)
-      return this.studies.find((study: any) => study.study_id === studyId);
+      // Initial Solution Solution 1. Optional chaining (?.)
+      // return this.studies.find((study: any) => study.study_id === studyId);
+      
+      // Solution 2. Function return data
+      function findStudy(study: any) {
+        return study.study_id === studyId;
+      }      
+      if (this.studies.find(findStudy)) {
+        return this.studies.find(findStudy).level;
+      }
     },
     getGenderById(genderId: any) {
-      // Initial Solution & Solution 1. Optional chaining (?.)
-      return (this.gender).find((gender: any) => gender.gender_id === genderId);
+      // Initial Solution Solution 1. Optional chaining (?.)
+      // return (this.gender).find((gender: any) => gender.gender_id === genderId);
+      
+      // Solution 2. Function return data
+      function findGender(gender: any) {
+        return gender.gender_id === genderId;
+      }      
+      if (this.gender.find(findGender)) {
+        return this.gender.find(findGender).type;
+      }
     },
     getBloodTypeById(bloodTypeId: any): any {
-      // Initial Solution & Solution 1. Optional chaining (?.)
-      return this.bloodType.find((bloodType: any) => bloodType.bloodType_id === bloodTypeId);
+      // Initial Solution Solution 1. Optional chaining (?.)
+      // return this.bloodType.find((bloodType: any) => bloodType.bloodType_id === bloodTypeId);
+           
+      // Solution 2. Function return data
+      function findBloodType(bloodType: any) {
+        return bloodType.bloodType_id === bloodTypeId;
+      }      
+      if (this.bloodType.find(findBloodType)) {
+        return this.bloodType.find(findBloodType).bloodName;
+      }
     }
   },
 }
