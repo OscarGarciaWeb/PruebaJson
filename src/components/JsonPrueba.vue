@@ -24,7 +24,7 @@
         <td>{{ person.weight || 'N/A' }}</td>
 
         <!-- Initial Solution -->
-        <td>
+        <!-- <td>
           {{ getCityById(person.city_id).cityName ? 
              getCityById(person.city_id).cityName : 'N/A' }}
         </td>
@@ -43,12 +43,31 @@
         <td>
           {{ getBloodTypeById(person.bloodtype_id) ? 
              getBloodTypeById(person.bloodtype_id).bloodName : 'N/A' }}
-        </td>
+        </td> -->
         <!-- Initial Solution -->
+
+        <!-- Solution 1. Optional chaining (?.) -->
+        <td>
+          {{ getCityById(person.city_id)?.cityName || 'N/A' }}
+        </td>
+        <td>
+          {{ getCountryById(getCityById(person.city_id).country_id)?.countryName || 'N/A' }}
+        </td>
+        <td>
+          {{ getStudyById(person.study_id)?.level || 'N/A' }}
+        </td>
+        <td>
+          {{ getGenderById(person.gender_id)?.type || 'N/A' }}
+        </td>
+        <td>
+          {{ getBloodTypeById(person.bloodtype_id)?.bloodName || 'N/A' }}
+        </td>
+        <!-- Solution 1. Optional chaining (?.) -->
       </tr>
     </tbody>
   </table>
 </template>
+
 <script lang="ts">
 export default {
   data(): any {
@@ -203,18 +222,23 @@ export default {
   mounted() {},
   methods: {
     getCityById(cityId: any): any {
+      // Initial Solution & Solution 1. Optional chaining (?.)
       return this.cities.find((city: any) => city.city_id === cityId); 
     },
     getCountryById(countryId: any): any {
+      // Initial Solution & Solution 1. Optional chaining (?.)
       return this.countries.find((country: any) => country.country_id === countryId);
     },
     getStudyById(studyId: any): any { 
+      // Initial Solution & Solution 1. Optional chaining (?.)
       return this.studies.find((study: any) => study.study_id === studyId);
     },
     getGenderById(genderId: any) {
+      // Initial Solution & Solution 1. Optional chaining (?.)
       return (this.gender).find((gender: any) => gender.gender_id === genderId);
     },
     getBloodTypeById(bloodTypeId: any): any {
+      // Initial Solution & Solution 1. Optional chaining (?.)
       return this.bloodType.find((bloodType: any) => bloodType.bloodType_id === bloodTypeId);
     }
   },
